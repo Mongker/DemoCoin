@@ -4,33 +4,41 @@ const EC = require('elliptic').ec;
 const ec = new EC('secp256k1');
 
 // Your private key goes here
+// Khóa riêng của bạn ở đây
 const myKey = ec.keyFromPrivate(
-  '7c4c45907dec40c91bab3480c39032e90049f1a44f3e18c3e07c23e3273995cf'
+  'b8481a6bc7135a658f6074e6f931fbdc294b82f907e11614747b540bd78e9182'
 );
 
 // From that we can calculate your public key (which doubles as your wallet address)
+// Từ đó, chúng tôi có thể tính toán khóa công khai của bạn (nhân đôi địa chỉ ví của bạn)
 const myWalletAddress = myKey.getPublic('hex');
 
 // Create new instance of Blockchain class
+// Tạo phiên bản mới của lớp Blockchain
 const savjeeCoin = new Blockchain();
 
 // Mine first block
+// Khai thác khối đầu tiên
 savjeeCoin.minePendingTransactions(myWalletAddress);
 
 // Create a transaction & sign it with your key
-const tx1 = new Transaction(myWalletAddress, 'address2', 100);
+// Tạo giao dịch và ký tên bằng chìa khóa của bạn
+const tx1 = new Transaction(myWalletAddress, 'address2', 50);
 tx1.signTransaction(myKey);
 savjeeCoin.addTransaction(tx1);
 
 // Mine block
-savjeeCoin.minePendingTransactions(myWalletAddress);
+// khối mỏ
+// savjeeCoin.minePendingTransactions(myWalletAddress);
 
 // Create second transaction
+// Tạo giao dịch thứ hai
 const tx2 = new Transaction(myWalletAddress, 'address1', 50);
 tx2.signTransaction(myKey);
 savjeeCoin.addTransaction(tx2);
 
 // Mine block
+// khối mỏ
 savjeeCoin.minePendingTransactions(myWalletAddress);
 
 console.log();
@@ -44,3 +52,13 @@ console.log(
 // Check if the chain is valid
 console.log();
 console.log('Blockchain valid?', savjeeCoin.isChainValid() ? 'Yes' : 'No');
+
+// Get List Block
+console.log();
+const blockchain = savjeeCoin.getListBlock();
+console.log('List Block: ', blockchain[blockchain.length - 1]);
+
+
+// Get List Block
+console.log();
+console.log(`Transactions ${myWalletAddress} :`, savjeeCoin.getAllTransactionsForWallet(myWalletAddress));

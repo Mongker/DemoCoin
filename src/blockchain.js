@@ -97,9 +97,9 @@ class Block {
       .createHash('sha256')
       .update(
         this.previousHash +
-          this.timestamp +
-          JSON.stringify(this.transactions) +
-          this.nonce
+        this.timestamp +
+        JSON.stringify(this.transactions) +
+        this.nonce
       )
       .digest('hex');
   }
@@ -326,6 +326,14 @@ class Blockchain {
     }
 
     return true;
+  }
+
+  /**
+   * getBlock 
+  * @returns {Block}
+  */
+  getListBlock() {
+    return this.chain;
   }
 }
 
