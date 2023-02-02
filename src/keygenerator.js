@@ -8,7 +8,7 @@ const ec = new EC('secp256k1');
 
 // Generate a new key pair and convert them to hex-string
 // Tạo một cặp khóa mới và chuyển đổi chúng thành chuỗi hex
-const key = ec.genKeyPair('monglvx');
+const key = ec.genKeyPair('');
 const publicKey = key.getPublic('hex');
 const privateKey = key.getPrivate('hex');
 
