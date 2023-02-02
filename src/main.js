@@ -50,7 +50,6 @@ console.log(
 // savjeeCoin.chain[1].transactions[0].amount = 10;
 
 // Check if the chain is valid
-console.log();
 console.log('Blockchain valid?', savjeeCoin.isChainValid() ? 'Yes' : 'No');
 
 // Get List Block
